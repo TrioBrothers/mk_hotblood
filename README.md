@@ -1,7 +1,11 @@
-# hello world
-minkyu chung
-## hello world2
-hello
-### hello world3
-- hello
-- bye 
+# Minkyu Chung
+    C Language
+    C++ Language
+    Java Language
+
+## Konkuk Univ. 
+- Architecture
+- Computer Science
+
+## TrioBrothers
+- steam games
