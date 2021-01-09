@@ -9,11 +9,11 @@ void ShowInfo();
 
 using namespace std;
 
-typedef struct {
+struct Account{
 	int id;
 	int balance;
 	char name[20];
-}Account;
+};
 
 Account customer[ACCNUM];
 int cnt = 0;
