@@ -1,28 +1,31 @@
+/*
+	Banking System Ver 0.2
+	작성자 : 정민규
+	내 용 : Account 클래스, 객체 포인터 배열 추가
+*/
+
 #include <iostream>
-#include <cstring>
-#define ACCNUM 20
+#include <cstring>	
+#include "Account.h"
+#define ACCNUM 50
+#define NAME_LEN 15
+
+using namespace std;
+
+Account* acc[ACCNUM];		//객체 포인터 배열
+int cnt = 0;
+
 void ShowMenu();
 void CreateAccount();
 void Deposit();
 void Withdraw();
 void ShowInfo();
+void Delete();
 
-using namespace std;
-
-struct Account{
-	int id;
-	int balance;
-	char name[20];
-};
-
-Account customer[ACCNUM];
-int cnt = 0;
-
-int main(){
+int main() {
 	int num;
-	int flag = 1;
 
-	while (flag) {
+	while (1) {
 		ShowMenu();
 		cin >> num;
 		switch (num) {
@@ -39,17 +42,18 @@ int main(){
 			ShowInfo();			//계좌정보 출력
 			break;
 		case 5:
-			flag = 0;			//프로그램 종료
-			break;
+			return 0;			//프로그램 종료
 		default:
 			cout << "잘못 입력하셨습니다." << endl;
 			break;
 		}
 	}
+	Delete();
 	return 0;
 }
 
 void ShowMenu() {
+	int num = 0;
 	cout << "----------Menu----------" << endl;
 	cout << "1. 계좌개설" << endl;
 	cout << "2. 입금" << endl;
@@ -60,30 +64,37 @@ void ShowMenu() {
 }
 
 void CreateAccount() {
+	int idNum, bal;
+	char name[NAME_LEN];
+
 	if (cnt == ACCNUM)
 		return;
 	cout << "[계좌개설]" << endl;
 	cout << "계좌ID: ";
-	cin >> customer[cnt].id;
+	cin >> idNum;
 	cout << "이름: ";
-	cin >> customer[cnt].name;
+	cin >> name;
 	cout << "입금액: ";
-	cin >> customer[cnt].balance;
+	cin >> bal;
+
+	acc[cnt] = new Account(name, idNum, bal);
 	cnt++;
 }
 
 void Deposit() {
 	int accID, money;
+	int modBal;					//입금 후 잔액
 	cout << "[입금]" << endl;
-	
+
 	cout << "계좌ID: ";
 	cin >> accID;
 	cout << "입금액: ";
 	cin >> money;
 
 	for (int i = 0; i < cnt; i++) {
-		if (customer[i].id == accID) {
-			customer[i].balance += money;
+		if (acc[i]->GetId() == accID) {
+			modBal = acc[i]->GetBalance() + money;
+			acc[i]->SetBalance(modBal);
 			return;
 		}
 	}
@@ -92,6 +103,7 @@ void Deposit() {
 
 void Withdraw() {
 	int accID, money;
+	int modBal;				//인출 후 잔액
 	cout << "[출금]" << endl;
 
 	cout << "계좌ID: ";
@@ -100,12 +112,12 @@ void Withdraw() {
 	cin >> money;
 
 	for (int i = 0; i < cnt; i++) {
-		if (customer[i].id == accID) {
-			if (customer[i].balance < money) {
+		if (acc[i]->GetId() == accID) {
+			if (modBal = (acc[i]->GetBalance() - money)) {
 				cout << "잔액이 부족합니다." << endl;
 				return;
 			}
-			customer[i].balance -= money;
+			acc[i]->SetBalance(modBal);
 			return;
 		}
 	}
@@ -114,8 +126,12 @@ void Withdraw() {
 void ShowInfo() {
 	cout << "-------------------------" << endl;
 	for (int i = 0; i < cnt; i++) {
-		cout << "계좌ID: " << customer[i].id << endl;
-		cout << "이름: " << customer[i].name << endl;
-		cout << "입금액: " << customer[i].balance << "\n" <<endl;
+		acc[i]->ShowCustomerInfo();
+	}
+}
+
+void Delete() {
+	for (int i = 0; i < cnt; i++) {
+		delete acc[i];
 	}
 }
