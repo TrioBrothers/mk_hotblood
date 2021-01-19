@@ -113,7 +113,8 @@ void Withdraw() {
 
 	for (int i = 0; i < cnt; i++) {
 		if (acc[i]->GetId() == accID) {
-			if (modBal = (acc[i]->GetBalance() - money)) {
+			modBal = acc[i]->GetBalance() - money;	
+			if (modBal < 0) {					
 				cout << "잔액이 부족합니다." << endl;
 				return;
 			}
