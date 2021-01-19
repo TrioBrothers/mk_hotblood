@@ -19,13 +19,13 @@ public:
 	int GetId() const {
 		return id;
 	}
-	int GetBalance() {
+	int GetBalance() const {
 		return balance;
 	}
 	void SetBalance(int modBalance) {
 		balance = modBalance;
 	}
-	void ShowCustomerInfo() {
+	void ShowCustomerInfo() const {
 		cout << "계좌ID: " << id << endl;
 		cout << "이름: " << name << endl;
 		cout << "입금액: " << balance << endl << endl;
