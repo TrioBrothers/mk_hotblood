@@ -1,7 +1,7 @@
 /*
-	Banking System Ver 0.2
+	Banking System Ver 0.4.1
 	작성자 : 정민규
-	내 용 : Account 클래스, 객체 포인터 배열 추가
+	내 용 : 변수명 변경과 불필요한 동적할당 제거
 */
 
 #include <iostream>
@@ -83,7 +83,7 @@ void CreateAccount() {
 
 void Deposit() {
 	int accID, money;
-	int modBal;					//입금 후 잔액
+	int afterBal;					//입금 후 잔액
 	cout << "[입금]" << endl;
 
 	cout << "계좌ID: ";
@@ -93,8 +93,8 @@ void Deposit() {
 
 	for (int i = 0; i < cnt; i++) {
 		if (acc[i]->GetId() == accID) {
-			modBal = acc[i]->GetBalance() + money;
-			acc[i]->SetBalance(modBal);
+			afterBal = acc[i]->GetBalance() + money;
+			acc[i]->SetBalance(afterBal);
 			return;
 		}
 	}
@@ -113,7 +113,8 @@ void Withdraw() {
 
 	for (int i = 0; i < cnt; i++) {
 		if (acc[i]->GetId() == accID) {
-			if (modBal = (acc[i]->GetBalance() - money)) {
+			modBal = acc[i]->GetBalance() - money;	
+			if (modBal < 0) {					
 				cout << "잔액이 부족합니다." << endl;
 				return;
 			}
