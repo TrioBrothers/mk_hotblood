@@ -18,7 +18,6 @@ public:
 	}
 	Account(const Account& copy)					//깊은 복사생성자
 		: id(copy.id),balance(copy.balance){
-		name = new char[strlen(copy.name) + 1];
 		strcpy(name, copy.name);
 	}
 	int GetId() const {
