@@ -1,7 +1,7 @@
 /*
-	Banking System Ver 0.4.1
+	Banking System Ver 0.4.2
 	작성자 : 정민규
-	내 용 : 변수명 변경과 불필요한 동적할당 제거
+	내 용 : 함수별 기능 세분화
 */
 
 #include <iostream>
@@ -18,7 +18,9 @@ int cnt = 0;
 void ShowMenu();
 void CreateAccount();
 void Deposit();
+int CheckId(int id);
 void Withdraw();
+void CheckBalance(int idx, int money);
 void ShowInfo();
 void Delete();
 
@@ -82,7 +84,7 @@ void CreateAccount() {
 }
 
 void Deposit() {
-	int accID, money;
+	int accID, money, idx;
 	int afterBal;					//입금 후 잔액
 	cout << "[입금]" << endl;
 
@@ -91,14 +93,24 @@ void Deposit() {
 	cout << "입금액: ";
 	cin >> money;
 
+	idx = CheckId(accID);		
+	cout << idx << endl;
+	if (idx > -1) {
+		afterBal = acc[idx]->GetBalance() + money;
+		acc[idx]->SetBalance(afterBal);
+		return;
+	}
+	return;
+}
+
+int CheckId(int id) {					//존재하는 ID인지 확인하는 함수
 	for (int i = 0; i < cnt; i++) {
-		if (acc[i]->GetId() == accID) {
-			afterBal = acc[i]->GetBalance() + money;
-			acc[i]->SetBalance(afterBal);
-			return;
+		if (acc[i]->GetId() == id) {
+			return i;
 		}
 	}
 	cout << "ID를 다시 확인해주세요." << endl;
+	return -1;
 }
 
 void Withdraw() {
