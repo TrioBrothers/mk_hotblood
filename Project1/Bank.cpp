@@ -87,7 +87,6 @@ void Deposit() {
 	int accID, money, idx;
 	int afterBal;					//입금 후 잔액
 	cout << "[입금]" << endl;
-
 	cout << "계좌ID: ";
 	cin >> accID;
 	cout << "입금액: ";
@@ -114,28 +113,30 @@ int CheckId(int id) {					//존재하는 ID인지 확인하는 함수
 }
 
 void Withdraw() {
-	int accID, money;
-	int modBal;				//인출 후 잔액
+	int accID, money, idx;
 	cout << "[출금]" << endl;
-
 	cout << "계좌ID: ";
 	cin >> accID;
 	cout << "출금액: ";
 	cin >> money;
 
-	for (int i = 0; i < cnt; i++) {
-		if (acc[i]->GetId() == accID) {
-			modBal = acc[i]->GetBalance() - money;	
-			if (modBal < 0) {					
-				cout << "잔액이 부족합니다." << endl;
-				return;
-			}
-			acc[i]->SetBalance(modBal);
-			return;
-		}
+	idx = CheckId(accID);
+	if (idx > -1) {
+		CheckBalance(idx, money);
 	}
-	cout << "ID를 다시 확인해주세요." << endl;
 }
+
+void CheckBalance(int idx, int money) {			//출금이 가능한지 확인하는 함수
+	int afterBal;
+	afterBal = acc[idx]->GetBalance() - money;
+	if (afterBal < 0) {
+		cout << "잔액이 부족합니다." << endl;
+		return;
+	}
+	acc[idx]->SetBalance(afterBal);
+	return;
+}
+
 void ShowInfo() {
 	cout << "-------------------------" << endl;
 	for (int i = 0; i < cnt; i++) {
