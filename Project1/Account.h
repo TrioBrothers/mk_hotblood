@@ -6,11 +6,8 @@
 using namespace std;
 
 class Account {
-private:
-	char name[MAX_LEN];			//회원명
-	int id;						//회원ID
-	int balance;				//잔액
 public:
+
 	Account(char* name, int id, int bal)
 		:balance(bal), id(id)
 	{
@@ -34,8 +31,10 @@ public:
 		cout << "이름: " << name << endl;
 		cout << "입금액: " << balance << endl << endl;
 	}
-	~Account() {
-		delete[]name;
-	}
+	~Account() { }
+private:
+	char name[MAX_LEN];			//회원명
+	int id;						//회원ID
+	int balance;				//잔액
 };
 #endif
