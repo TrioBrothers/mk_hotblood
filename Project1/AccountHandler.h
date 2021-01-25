@@ -14,7 +14,10 @@ public:
 	void ShowMenu();
 	void CreateAccount();
 	void Deposit();
+	int CheckId(int id);
+	void UpdateBalance(int idx, int money);
 	void Withdraw();
+	bool CheckBalance(int idx, int money);
 	void ShowInfo();
 	~AccountHandler();
 private:
@@ -50,13 +53,11 @@ void AccountHandler::CreateAccount() {
 	cout << "입금액: ";
 	cin >> bal;
 
-	acc[cnt] = new Account(name, idNum, bal);
-	cnt++;
+	acc[cnt++] = new Account(name, idNum, bal);
 }
 
 void AccountHandler::Deposit() {
 	int accID, money;
-	int afterBal;					//입금 후 잔액
 	cout << "[입금]" << endl;
 
 	cout << "계좌ID: ";
@@ -64,19 +65,30 @@ void AccountHandler::Deposit() {
 	cout << "입금액: ";
 	cin >> money;
 
-	for (int i = 0; i < cnt; i++) {
-		if (acc[i]->GetId() == accID) {
-			afterBal = acc[i]->GetBalance() + money;
-			acc[i]->SetBalance(afterBal);
-			return;
-		}
+	int idx = CheckId(accID);
+	if (idx > -1) {
+		UpdateBalance(idx, money);
+		return;
 	}
 	cout << "ID를 다시 확인해주세요." << endl;
 }
 
+int AccountHandler::CheckId(int id) {
+	for (int i = 0; i < cnt; i++) {
+		if (id == acc[i]->GetId()) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+void AccountHandler::UpdateBalance(int idx, int money) {
+	int afterBal = acc[idx]->GetBalance() + money;
+	acc[idx]->SetBalance(afterBal);
+}
+
 void AccountHandler::Withdraw() {
 	int accID, money;
-	int modBal;				//인출 후 잔액
 	cout << "[출금]" << endl;
 
 	cout << "계좌ID: ";
@@ -84,19 +96,22 @@ void AccountHandler::Withdraw() {
 	cout << "출금액: ";
 	cin >> money;
 
-	for (int i = 0; i < cnt; i++) {
-		if (acc[i]->GetId() == accID) {
-			modBal = acc[i]->GetBalance() - money;
-			if (modBal < 0) {
-				cout << "잔액이 부족합니다." << endl;
-				return;
-			}
-			acc[i]->SetBalance(modBal);
+	int idx = CheckId(accID);
+	if (idx > -1) {
+		if (!CheckBalance(idx, money)) {
+			cout << "잔액이 부족합니다." << endl;
 			return;
 		}
+		UpdateBalance(idx, money * (-1));
+		return;
 	}
 	cout << "ID를 다시 확인해주세요." << endl;
 }
+
+bool AccountHandler::CheckBalance(int idx, int money) {
+	return (acc[idx]->GetBalance() - money) > 0 ? true : false;
+}
+
 void AccountHandler::ShowInfo() {
 	cout << "-------------------------" << endl;
 	for (int i = 0; i < cnt; i++) {
@@ -107,7 +122,6 @@ void AccountHandler::ShowInfo() {
 AccountHandler::~AccountHandler() {
 	for (int i = 0; i < cnt; i++) {
 		delete acc[i];
-		cout << "바보" << endl;
 	}
 }
 #endif __ACCOUNTHANDLER_H_
