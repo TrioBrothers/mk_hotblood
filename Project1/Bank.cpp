@@ -17,13 +17,13 @@ int main() {
 			handler.CreateAccount();	//계좌개설
 			break;
 		case 2:
-			handler.Deposit();			//입금
+			handler.DepositMenu();			//입금
 			break;
 		case 3:
-			handler.Withdraw();			//출금
+			handler.WithdrawMenu();			//출금
 			break;
 		case 4:
-			handler.ShowInfo();			//계좌정보 출력
+			handler.ShowAllCustomerInfo();			//계좌정보 출력
 			break;
 		case 5:
 			return 0;					//프로그램 종료

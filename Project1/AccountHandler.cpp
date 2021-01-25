@@ -30,7 +30,7 @@ void AccountHandler::CreateAccount() {
 	acc[cnt++] = new Account(name, idNum, bal);
 }
 
-void AccountHandler::Deposit() {
+void AccountHandler::DepositMenu() {
 	int accID, money;
 	cout << "[입금]" << endl;
 
@@ -39,7 +39,7 @@ void AccountHandler::Deposit() {
 	cout << "입금액: ";
 	cin >> money;
 
-	int idx = CheckId(accID);
+	int idx = CheckAccountID(accID);
 	if (idx > -1) {
 		UpdateBalance(idx, money);
 		return;
@@ -47,7 +47,7 @@ void AccountHandler::Deposit() {
 	cout << "ID를 다시 확인해주세요." << endl;
 }
 
-int AccountHandler::CheckId(int id) {
+int AccountHandler::CheckAccountID(int id) {
 	for (int i = 0; i < cnt; i++) {
 		if (id == acc[i]->GetId()) {
 			return i;
@@ -61,7 +61,7 @@ void AccountHandler::UpdateBalance(int idx, int money) {
 	acc[idx]->SetBalance(afterBal);
 }
 
-void AccountHandler::Withdraw() {
+void AccountHandler::WithdrawMenu() {
 	int accID, money;
 	cout << "[출금]" << endl;
 
@@ -70,9 +70,9 @@ void AccountHandler::Withdraw() {
 	cout << "출금액: ";
 	cin >> money;
 
-	int idx = CheckId(accID);
+	int idx = CheckAccountID(accID);
 	if (idx > -1) {
-		if (!CheckBalance(idx, money)) {
+		if (!IsThereEnoughBalance(idx, money)) {
 			cout << "잔액이 부족합니다." << endl;
 		}
 		UpdateBalance(idx, money * (-1));
@@ -81,11 +81,11 @@ void AccountHandler::Withdraw() {
 	}
 }
 
-bool AccountHandler::CheckBalance(int idx, int money) {
+bool AccountHandler::IsThereEnoughBalance(int idx, int money) {
 	return (acc[idx]->GetBalance() - money) > 0 ? true : false;
 }
 
-void AccountHandler::ShowInfo() {
+void AccountHandler::ShowAllCustomerInfo() {
 	cout << "-------------------------" << endl;
 	for (int i = 0; i < cnt; i++) {
 		acc[i]->ShowCustomerInfo();

@@ -1,5 +1,4 @@
 #pragma once
-#define __ACCOUNTHANDLER_H_
 #include <cstring>
 #include <iostream>
 #include "Account.h"
@@ -13,12 +12,12 @@ public:
 	AccountHandler();
 	void ShowMenu();
 	void CreateAccount();
-	void Deposit();
-	int CheckId(int id);
+	void DepositMenu();
+	int CheckAccountID(int id);
 	void UpdateBalance(int idx, int money);
-	void Withdraw();
-	bool CheckBalance(int idx, int money);
-	void ShowInfo();
+	void WithdrawMenu();
+	bool IsThereEnoughBalance(int idx, int money);
+	void ShowAllCustomerInfo();
 	~AccountHandler();
 private:
 	int cnt;
