@@ -74,12 +74,11 @@ void AccountHandler::Withdraw() {
 	if (idx > -1) {
 		if (!CheckBalance(idx, money)) {
 			cout << "잔액이 부족합니다." << endl;
-			return;
 		}
 		UpdateBalance(idx, money * (-1));
-		return;
+	}else {
+		cout << "ID를 다시 확인해주세요." << endl;
 	}
-	cout << "ID를 다시 확인해주세요." << endl;
 }
 
 bool AccountHandler::CheckBalance(int idx, int money) {
