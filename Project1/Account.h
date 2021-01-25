@@ -1,4 +1,4 @@
-#ifndef __ACCOUNT_H_
+#pragma once
 #define __ACCOUNT_H_
 #include <cstring>
 #include <iostream>
@@ -37,4 +37,3 @@ private:
 	int id;						//È¸¿øID
 	int balance;				//ÀÜ¾×
 };
-#endif

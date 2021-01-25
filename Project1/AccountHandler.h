@@ -1,4 +1,4 @@
-#ifndef __ACCOUNTHANDLER_H_
+#pragma once
 #define __ACCOUNTHANDLER_H_
 #include <cstring>
 #include <iostream>
@@ -124,4 +124,3 @@ AccountHandler::~AccountHandler() {
 		delete acc[i];
 	}
 }
-#endif __ACCOUNTHANDLER_H_
