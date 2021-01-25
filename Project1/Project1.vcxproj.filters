@@ -18,6 +18,9 @@
     <ClCompile Include="Bank.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="AccountHandler.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccountHandler.h">
