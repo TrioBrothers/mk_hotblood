@@ -2,6 +2,8 @@
 #include <cstring>
 #include <iostream>
 #include "Account.h"
+#include "NormalAccount.h"
+#include "HighCreditAccount.h"
 #define ACCNUM 50
 #define NAME_LEN 15
 
