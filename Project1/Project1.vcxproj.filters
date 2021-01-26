@@ -29,5 +29,11 @@
     <ClInclude Include="Account.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="NormalAccount.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HighCreditAccount.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
