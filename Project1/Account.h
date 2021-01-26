@@ -25,10 +25,13 @@ public:
 	void SetBalance(int modBalance) {
 		balance = modBalance;
 	}
+	virtual void DepositMoney(int money) {
+		balance = GetBalance() + money;
+	}
 	void ShowCustomerInfo() const {
 		cout << "°èÁÂID: " << id << endl;
 		cout << "ÀÌ¸§: " << name << endl;
-		cout << "ÀÔ±Ý¾×: " << balance << endl << endl;
+		cout << "ÀÜ¾×: " << balance << endl << endl;
 	}
 	~Account() { }
 private:
