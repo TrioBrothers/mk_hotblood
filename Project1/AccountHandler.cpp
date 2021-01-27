@@ -24,24 +24,20 @@ void AccountHandler::CreateAccount() {
 	cout << "1.보통예금계좌 2.신용신뢰계좌" << endl;
 	cin >> sel;
 
+AccountInfo AccountHandler::EnterAccountInfo() {
+	AccountInfo acc;
 	cout << "[계좌개설]" << endl;
 	cout << "계좌ID: ";
-	cin >> idNum;
+	cin >> acc.idNum;
 	cout << "이름: ";
-	cin >> name;
+	cin >> acc.name;
 	cout << "입금액: ";
-	cin >> bal;
+	cin >> acc.bal;
 	cout << "이자율: ";
-	cin >> interest;
-	if (sel == 2) {
-		cout << "신용등급(1toA, 2toB, 3toC): ";
-		cin >> credit;
-		acc[cnt++] = new HighCreditAccount(name, idNum, bal, interest, credit);
-		return;
-	}
-	acc[cnt++] = new NormalAccount(name, idNum, bal, interest);
-}
+	cin >> acc.interest;
 
+	return acc;
+}
 void AccountHandler::DepositMenu() {
 	int accID, money;
 	cout << "[입금]" << endl;
