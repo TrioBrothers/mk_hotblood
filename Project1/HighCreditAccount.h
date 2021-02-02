@@ -6,8 +6,8 @@ using namespace std;
 
 class HighCreditAccount : public NormalAccount {
 public:
-	HighCreditAccount(char* name, int id, int bal, int interRate, int credit)
-		:NormalAccount(name, id, bal, interRate) , creditRating(credit){ 		}
+	HighCreditAccount(AccountInfo info, int credit)
+		:NormalAccount(info) , creditRating(credit){ 		}
 
 	virtual void DepositMoney(int money) {
 		int afterBal = GetBalance() + money * (1 + GetInterestRate() + AddInterestRate());
