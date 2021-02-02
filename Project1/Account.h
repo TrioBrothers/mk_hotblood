@@ -1,7 +1,6 @@
 #pragma once
 #include <cstring>
 #include <iostream>
-#define MAX_LEN 30
 #define NAME_LEN 15
 using namespace std;
 
@@ -22,6 +21,12 @@ public:
 		: id(copy.id),balance(copy.balance){
 		strcpy(name, copy.name);
 	}
+	Account& operator=(const Account& ref) {
+		id = ref.id;
+		balance = ref.balance;
+		strcpy(name, ref.name);
+		return *this;
+	}
 	int GetId() const {
 		return id;
 	}
@@ -41,7 +46,7 @@ public:
 	}
 	~Account() { }
 private:
-	char name[MAX_LEN];			//회원명
+	char name[NAME_LEN];			//회원명
 	int id;						//회원ID
 	int balance;				//잔액
 };

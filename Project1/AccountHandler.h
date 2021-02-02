@@ -1,10 +1,9 @@
 #pragma once
 #include <cstring>
 #include <iostream>
-#include "Account.h"
+#include "AccountArray.h"
 #include "NormalAccount.h"
 #include "HighCreditAccount.h"
-#define ACCNUM 50
 
 using namespace std;
 class AccountHandler{
@@ -22,5 +21,5 @@ public:
 	~AccountHandler();
 private:
 	int cnt;
-	Account* acc[ACCNUM];
+	BoundCheckAccountPtrArray acc;
 };

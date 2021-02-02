@@ -1,4 +1,5 @@
 #include "AccountHandler.h"
+
 AccountHandler::AccountHandler()
 	:cnt(0) { }
 
@@ -14,7 +15,7 @@ void AccountHandler::ShowMenu() {
 }
 
 void AccountHandler::CreateAccount() {
-	if (cnt == ACCNUM)
+	if (cnt == acc.GetArrLen())
 		return;
 	int sel;
 	cout << "[계좌종류선택]" << endl;
