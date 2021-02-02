@@ -14,22 +14,42 @@ void AccountHandler::ShowMenu() {
 }
 
 void AccountHandler::CreateAccount() {
-	int idNum, bal;
-	char name[NAME_LEN];
-
 	if (cnt == ACCNUM)
 		return;
-	cout << "[계좌개설]" << endl;
-	cout << "계좌ID: ";
-	cin >> idNum;
-	cout << "이름: ";
-	cin >> name;
-	cout << "입금액: ";
-	cin >> bal;
-
-	acc[cnt++] = new Account(name, idNum, bal);
+	int sel;
+	cout << "[계좌종류선택]" << endl;
+	cout << "1.보통예금계좌 2.신용신뢰계좌" << endl;
+	cin >> sel;
+	AccountInfo info = EnterAccountInfo();
+	if (sel == 1) {
+		acc[cnt++] = new NormalAccount(info);
+	}
+	else if (sel == 2) {
+		int credit;
+		cout << "신용등급(1toA, 2toB, 3toC): ";
+		cin >> credit;
+		acc[cnt++] = new HighCreditAccount(info, credit);
+	}
+	else {
+		cout << "1,2 중에 선택해주세요" << endl;
+	}
+	
 }
 
+AccountInfo AccountHandler::EnterAccountInfo() {
+	AccountInfo acc;
+	cout << "[계좌개설]" << endl;
+	cout << "계좌ID: ";
+	cin >> acc.idNum;
+	cout << "이름: ";
+	cin >> acc.name;
+	cout << "입금액: ";
+	cin >> acc.bal;
+	cout << "이자율: ";
+	cin >> acc.interest;
+
+	return acc;
+}
 void AccountHandler::DepositMenu() {
 	int accID, money;
 	cout << "[입금]" << endl;
@@ -41,7 +61,7 @@ void AccountHandler::DepositMenu() {
 
 	int idx = CheckAccountID(accID);
 	if (idx > -1) {
-		UpdateBalance(idx, money);
+		acc[idx]->DepositMoney(money);
 		return;
 	}
 	cout << "ID를 다시 확인해주세요." << endl;
@@ -74,8 +94,9 @@ void AccountHandler::WithdrawMenu() {
 	if (idx > -1) {
 		if (!IsThereEnoughBalance(idx, money)) {
 			cout << "잔액이 부족합니다." << endl;
+		}else {
+			UpdateBalance(idx, money * (-1));
 		}
-		UpdateBalance(idx, money * (-1));
 	}else {
 		cout << "ID를 다시 확인해주세요." << endl;
 	}

@@ -2,11 +2,17 @@
 #include <cstring>
 #include <iostream>
 #define MAX_LEN 30
+#define NAME_LEN 15
 using namespace std;
 
+struct AccountInfo {
+	int idNum;
+	char name[NAME_LEN];
+	int bal;
+	int interest;
+};
 class Account {
 public:
-
 	Account(char* name, int id, int bal)
 		:balance(bal), id(id)
 	{
@@ -25,10 +31,13 @@ public:
 	void SetBalance(int modBalance) {
 		balance = modBalance;
 	}
+	virtual void DepositMoney(int money) {
+		balance = GetBalance() + money;
+	}
 	void ShowCustomerInfo() const {
 		cout << "°èÁÂID: " << id << endl;
 		cout << "ÀÌ¸§: " << name << endl;
-		cout << "ÀÔ±Ý¾×: " << balance << endl << endl;
+		cout << "ÀÜ¾×: " << balance << endl << endl;
 	}
 	~Account() { }
 private:
