@@ -8,12 +8,12 @@
 #define NAME_LEN 15
 
 using namespace std;
-struct AccountInfo {
-	int idNum;
-	char name[NAME_LEN];
-	int bal;
-	int interest;
-};
+//struct AccountInfo {
+//	int idNum;
+//	char name[NAME_LEN];
+//	int bal;
+//	int interest;
+//};
 class AccountHandler{
 public:
 	AccountHandler();

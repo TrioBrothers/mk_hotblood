@@ -22,13 +22,13 @@ void AccountHandler::CreateAccount() {
 	cin >> sel;
 	AccountInfo info = EnterAccountInfo();
 	if (sel == 1) {
-		acc[cnt++] = new NormalAccount(info.name, info.idNum, info.bal, info.interest);
+		acc[cnt++] = new NormalAccount(info);
 	}
 	else if (sel == 2) {
 		int credit;
 		cout << "신용등급(1toA, 2toB, 3toC): ";
 		cin >> credit;
-		acc[cnt++] = new HighCreditAccount(info.name, info.idNum, info.bal, info.interest, credit);
+		acc[cnt++] = new HighCreditAccount(info, credit);
 	}
 	else {
 		cout << "1,2 중에 선택해주세요" << endl;
